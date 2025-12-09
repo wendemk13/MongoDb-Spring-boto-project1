@@ -29,12 +29,12 @@ public class CoursesServicesImpl implements CoursesServices {
         coursesRepository.save(courses);
         return null;
     }
-
     @Override
     public Courses getCoursesById(String id) {
-        coursesRepository.findById(id);
-        return null;
+        return coursesRepository.findById(id).orElse(null);
     }
+
+
 
     @Override
     public void updateCourses(Courses courses) {
