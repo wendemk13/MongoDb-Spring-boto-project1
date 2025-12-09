@@ -1,6 +1,5 @@
 package com.example.SpringMongoDBProject1.SpringMongoDBProject1.users;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,24 +13,24 @@ public class UserController{
     UsersService usersService;
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAll()
+    public ResponseEntity<List<Users>> getAll()
     {
         return new ResponseEntity<>(usersService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserByID(@PathVariable String id){
+    public ResponseEntity<Users> getUserByID(@PathVariable String id){
         return new  ResponseEntity<>(usersService.getUserByID(id), HttpStatus.OK);
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User useradded=usersService.addUser(user);
+    public ResponseEntity<Users> createUser(@RequestBody Users user){
+        Users useradded=usersService.addUser(user);
         return new ResponseEntity<>(useradded,HttpStatus.CREATED);
     }
 
     @PutMapping("/users")
-    public ResponseEntity<User> updateUser(@RequestBody User user){
+    public ResponseEntity<Users> updateUser(@RequestBody Users user){
         usersService.updateUser(user);
         return new ResponseEntity<>(user,HttpStatus.OK);
     }

@@ -1,29 +1,70 @@
+//package com.example.SpringMongoDBProject1.SpringMongoDBProject1.users;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//
+//import java.util.List;
+//
+//@Service
+//public class UserServiceImpl implements UsersService{
+//    @Autowired
+//    UserRepository userRepository;
+//
+//    @Override
+//    public Users getUserByID(String id) {
+//        userRepository.findById(id);
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Users> getAll() {
+//        List<Users> all = userRepository.findAll();
+//        return all;
+//
+//
+//    }
+//
+//    @Override
+//    public void deleteByID(String id) {
+//        userRepository.deleteById(id);
+//    }
+//
+//    @Override
+//    public Users addUser(Users user) {
+//        Users userAdded=userRepository.save(user);
+//        return userAdded;
+//    }
+//
+//    @Override
+//    public Users updateUser(Users user) {
+//        userRepository.save(user);
+//        return user;
+//    }
+//
+//}
+
+
 package com.example.SpringMongoDBProject1.SpringMongoDBProject1.users;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Component
-public class UserServiceImpl implements UsersService{
+@Service
+public class UserServiceImpl implements UsersService {
+
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
     @Override
-    public User getUserByID(String id) {
-        Optional<User> user = userRepository.findById(id);
-        if(user.isPresent()){
-            return user.get();
-        }
-        return null;
+    public Users getUserByID(String id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Users> getAll() {
         return userRepository.findAll();
-
     }
 
     @Override
@@ -32,14 +73,12 @@ public class UserServiceImpl implements UsersService{
     }
 
     @Override
-    public User addUser(User user) {
-        userRepository.save(user);
-        return user;
+    public Users addUser(Users user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public User updateUser(User user) {
-        userRepository.save(user);
-        return user;
+    public Users updateUser(Users user) {
+        return userRepository.save(user); // save() acts as update if id exists
     }
 }
